@@ -17,6 +17,23 @@ func GetTodos(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(todoList)
 }
 
+func GetOneTodo(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	params := mux.Vars(r)
+	id, err := strconv.Atoi(params["id"])
+	if err != nil {
+		json.NewEncoder(w).Encode("invalid id")
+	}
+
+	for index, todo := range todoList {
+		if todo.Id == id {
+			json.NewEncoder(w).Encode(todoList[index])
+			return
+		}
+	}
+	json.NewEncoder(w).Encode("todo not found")
+}
 func AddTodo(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var todo models.Todo
@@ -71,11 +88,22 @@ func CompleteTodo(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode("Invalid Id")
 		return
 	}
+	// handling json body for valid value
+	var updatedTodo models.Todo
+
+	err = json.NewDecoder(r.Body).Decode(&updatedTodo)
+
+	if err != nil {
+		json.NewEncoder(w).Encode("Invalid json format")
+		return
+	}
 
 	for index, todo := range todoList {
 		if todo.Id == id {
 
-			todoList[index].Iscompleted = true
+			// todoList[index].Iscompleted = true  instead of hard coding I am going to dalne postman body
+
+			todoList[index].Iscompleted = updatedTodo.Iscompleted
 
 			json.NewEncoder(w).Encode(todoList[index])
 
