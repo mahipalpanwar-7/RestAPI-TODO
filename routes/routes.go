@@ -1,12 +1,16 @@
 package routes
 
-import "github.com/gorilla/mux"
+import (
+	"github.com/mahipalpanwar-7/RestAPI-TODO/controllers"
 
-func Router() *mux.Router{
+	"github.com/gorilla/mux"
+)
+
+func Router() *mux.Router {
 	router := mux.NewRouter()
-	router.HandleFunc("todos", GetTodos).Methods("GET")
-	router.HandleFunc("todo", AddTodo).Methods("POST")
-	router.HandleFunc("todos/{id}", UpdateTodo).Methods("PUT")
-	router.HandleFunc("todos/{id}", DeleteTodo).Methods("DELETE")
+	router.HandleFunc("todos", controllers.GetTodos).Methods("GET")
+	router.HandleFunc("todo", controllers.AddTodo).Methods("POST")
+	router.HandleFunc("todos/{id}", controllers.CompleteTodo).Methods("PUT")
+	router.HandleFunc("todos/{id}", controllers.DeleteTodo).Methods("DELETE")
 	return router
 }
