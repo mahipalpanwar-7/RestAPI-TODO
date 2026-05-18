@@ -3,8 +3,6 @@
 A simple Todo REST API built with Golang using:
 
 - Gorilla Mux
-- JWT Authentication
-- Middleware
 - CRUD Operations
 - REST APIs
 
@@ -16,9 +14,6 @@ A simple Todo REST API built with Golang using:
 - Get All Todos
 - Mark Todo as Completed
 - Delete Todo
-- JWT Authentication
-- Protected Routes
-- Middleware Support
 
 ---
 
@@ -26,7 +21,6 @@ A simple Todo REST API built with Golang using:
 
 - Golang
 - Gorilla Mux
-- JWT
 - REST API
 
 ---
