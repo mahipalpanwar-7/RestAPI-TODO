@@ -29,5 +29,3 @@ A simple Todo REST API built with Golang using:
 
 ```bash
 go get github.com/gorilla/mux
-
-go get github.com/golang-jwt/jwt/v5
